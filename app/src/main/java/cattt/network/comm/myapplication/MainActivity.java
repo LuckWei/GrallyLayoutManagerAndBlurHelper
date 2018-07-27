@@ -13,14 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Button mBlurBtn;
 
-    public MainActivity(){
+    public MainActivity() {
         super();
 
     }
@@ -60,6 +62,51 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private static final String[] THUMB_ARRAY = {
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/20-%E4%B8%AD%E5%9B%BD%E7%BA%A2.jpg",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E4%B8%AD%E5%9B%BD%E7%BA%A220.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/%E8%A5%BF%E6%B8%B8%E8%AE%B01.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%A4%A7%E5%90%89%E5%A4%A7%E5%88%A9.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180620125747.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E6%97%BA%E6%97%BA.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/10%E5%91%A8%E5%B9%B4.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/20-%E4%B8%AD%E5%9B%BD%E7%BA%A2.jpg",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E4%B8%AD%E5%9B%BD%E7%BA%A220.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/%E8%A5%BF%E6%B8%B8%E8%AE%B01.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%A4%A7%E5%90%89%E5%A4%A7%E5%88%A9.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180620125747.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E6%97%BA%E6%97%BA.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/10%E5%91%A8%E5%B9%B4.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/20-%E4%B8%AD%E5%9B%BD%E7%BA%A2.jpg",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E4%B8%AD%E5%9B%BD%E7%BA%A220.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/%E8%A5%BF%E6%B8%B8%E8%AE%B01.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%A4%A7%E5%90%89%E5%A4%A7%E5%88%A9.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180620125747.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E6%97%BA%E6%97%BA.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/10%E5%91%A8%E5%B9%B4.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/20-%E4%B8%AD%E5%9B%BD%E7%BA%A2.jpg",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E4%B8%AD%E5%9B%BD%E7%BA%A220.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/%E8%A5%BF%E6%B8%B8%E8%AE%B01.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%A4%A7%E5%90%89%E5%A4%A7%E5%88%A9.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180620125747.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E6%97%BA%E6%97%BA.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/10%E5%91%A8%E5%B9%B4.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/20-%E4%B8%AD%E5%9B%BD%E7%BA%A2.jpg",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E4%B8%AD%E5%9B%BD%E7%BA%A220.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/%E8%A5%BF%E6%B8%B8%E8%AE%B01.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%A4%A7%E5%90%89%E5%A4%A7%E5%88%A9.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180620125747.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E6%97%BA%E6%97%BA.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/10%E5%91%A8%E5%B9%B4.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/20-%E4%B8%AD%E5%9B%BD%E7%BA%A2.jpg",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E4%B8%AD%E5%9B%BD%E7%BA%A220.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/%E8%A5%BF%E6%B8%B8%E8%AE%B01.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%A4%A7%E5%90%89%E5%A4%A7%E5%88%A9.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180620125747.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/%E6%97%BA%E6%97%BA.png",
+                "http://hcb-cdn.oss-cn-beijing.aliyuncs.com/jkc/10%E5%91%A8%E5%B9%B4.png"
+        };
+
         private Context context;
 
         private MyAdapter(Context context) {
@@ -76,56 +123,24 @@ public class MainActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             if (holder instanceof MyHolder) {
                 MyHolder myHolder = (MyHolder) holder;
-                switch (position) {
-                    case 0:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#2196F3"));
-                        break;
-                    case 1:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#673AB7"));
-                        break;
-                    case 2:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#009688"));
-                        break;
-                    case 3:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#607D8B"));
-                        break;
-                    case 4:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#F44336"));
-                        break;
-                    case 5:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#A43436"));
-                        break;
-                    case 6:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#3F4643"));
-                        break;
-                    case 7:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#44336F"));
-                        break;
-                    case 8:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#600988"));
-                        break;
-                    case 9:
-                        myHolder.itemView.setBackgroundColor(Color.parseColor("#7673AB"));
-                        break;
-                }
-                myHolder.textView.setText("" + (++position));
+                GlideApp.with(context).load(THUMB_ARRAY[position]).dontAnimate()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(myHolder.itemView);
             }
         }
 
         @Override
         public int getItemCount() {
-            return 10;
+            return THUMB_ARRAY.length;
         }
 
         private static class MyHolder extends RecyclerView.ViewHolder {
 
-            private View itemView;
-            private TextView textView;
+            private ImageView itemView;
 
             public MyHolder(View itemView) {
                 super(itemView);
-                this.itemView = itemView;
-                textView = itemView.findViewById(R.id.pager_textview);
+                this.itemView = (ImageView) itemView;
             }
         }
     }
@@ -166,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 view.setRotationY(rotation);
             }
             if (fraction == 0) {
-                view.setElevation(scale-1);
+                view.setElevation(scale - 1);
                 view.setAlpha(alpha);
                 view.setTranslationX(view.getWidth() * -fraction * TRANSLATION);
                 view.setPivotY(0.5f * view.getHeight());
@@ -175,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 view.setScaleY(scale);
                 view.setRotationY(0);
             } else {
-                view.setElevation(scale-1);
+                view.setElevation(scale - 1);
                 view.setAlpha(alpha);
                 view.setTranslationX(view.getWidth() * -fraction * TRANSLATION);
                 view.setPivotY(0.5f * view.getHeight());
